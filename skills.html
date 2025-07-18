@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clxzy's</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #000000;
+      font-family: 'Segoe UI', sans-serif;
+      color: #000000;
+      overflow-x: hidden;
+      text-shadow: 0 0 5px #fff, 0 0 10px #aaa, 0 0 15px #555;
+      position: relative;
+      height: 100vh;
+      box-shadow: #f5f5f5;
+    }
+
+    /* Particle Styling (Lava Lamp) */
+    .particle {
+      position: absolute;
+      background-color: rgba(92, 92, 92, 0.116);
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: floatUp 10s ease-in infinite;
+      text-shadow: #ff0000;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) scale(0.5);
+      }
+      50% {
+        transform: translateY(-50vh) scale(1);
+      }
+      100% {
+        transform: translateY(100vh) scale(0.5);
+      }
+    }
+
+    header {
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #000000;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #f5f5f5;
+      text-shadow: white;
+    }
+
+    nav {
+      position: relative;
+    }
+
+    nav a {
+      margin-left: 30px;
+      color: #ccc;
+      text-decoration: none;
+      font-size: 1rem;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    nav a.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 100px 20px 60px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .hero.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+      min-height: 60px;
+    }
+
+    .hero h3 {
+      font-weight: 300;
+      color: #aaa;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .hero p {
+      color: #ccc;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .tagline-btn {
+      background: linear-gradient(145deg, #1c1c1c, #0a0a0a);
+      border-radius: 30px;
+      padding: 12px 30px;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 40px;
+      display: inline-block;
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .cta-buttons a {
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .cta-buttons a:first-child {
+      background: rgb(255, 255, 255);
+      color: #000000;
+      box-shadow: 0 0 20px rgba(255,255,255,0.1);
+      text-shadow: white;
+    }
+
+    .cta-buttons a:last-child {
+      background: transparent;
+      color: rgba(240, 240, 240, 0.719);
+      border: 2px solid #444;
+    }
+
+    .cta-buttons a:hover {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        padding: 20px;
+      }
+
+      nav a {
+        margin: 10px 15px;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+    }
+
+    /* Smooth text appearance animation */
+    @keyframes fadeInLetters {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .fade-in-text span {
+      display: inline-block;
+      opacity: 0;
+      animation: fadeInLetters 0.8s ease forwards;
+    }
+
+    .fade-in-text span:nth-child(1) {
+      animation-delay: 0s;
+    }
+    .fade-in-text span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .fade-in-text span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    .fade-in-text span:nth-child(4) {
+      animation-delay: 0.6s;
+    }
+    .fade-in-text span:nth-child(5) {
+      animation-delay: 0.8s;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Particle containers -->
+  <div id="particles-container"></div>
+
+  <header>
+    <div class="logo">Clxzy's</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html" class="visible">About</a>
+      <a href="system.html"class="Visible">Systems</a>
+      <a href="skills.html"class="Visible">Skills</a>
+      <a href="contact.html"class="Visible">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1 id="scrambleTitle">Skills Section Coming Soon...</h1>
+    </div>
+  </section>
+
+  <script>
+    // Particle Effect (Lava Lamp)
+    const particlesContainer = document.getElementById('particles-container');
+
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      const size = Math.random() * 10 + 5; // Random size for particles
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${Math.random() * window.innerWidth}px`; // Random horizontal position
+      particle.style.animationDuration = `${Math.random() * 4 + 4}s`; // Random float duration
+      particlesContainer.appendChild(particle);
+
+      setTimeout(() => {
+        particle.remove();
+      }, 6000); // Remove the particle after animation
+    }
+
+    setInterval(createParticle, 150); // Create a new particle every 150ms
+
+    // Text Scramble
+    const el = document.getElementById('scrambleTitle');
+    const text = el.textContent;
+    const chars = "?*/";
+    let frame = 0;
+    let queue = [];
+    const maxDuration = 25;
+
+    for (let i = 0; i < text.length; i++) {
+      const from = chars[Math.floor(Math.random() * chars.length)];
+      const to = text[i];
+      const start = Math.floor(Math.random() * 5);
+      const end = start + maxDuration + Math.floor(Math.random() * 45);
+      queue.push({ from, to, start, end });
+    }
+
+    const scramble = () => {
+      let output = '';
+      let complete = 0;
+
+      for (let i = 0; i < queue.length; i++) {
+        let { from, to, start, end, char } = queue[i];
+        if (frame >= end) {
+          output += to;
+          complete++;
+        } else if (frame >= start) {
+          if (!char || Math.random() < 0.28) {
+            char = chars[Math.floor(Math.random() * chars.length)];
+            queue[i].char = char;
+          }
+          output += `<span style="opacity:0.5">${char}</span>`;
+        } else {
+          output += from;
+        }
+      }
+
+      el.innerHTML = output;
+
+      if (complete < queue.length) {
+        requestAnimationFrame(scramble);
+        frame++;
+      } else {
+        setTimeout(() => {
+          const subHeading = document.getElementById('subHeading');
+          const description = document.getElementById('description');
+          subHeading.style.opacity = '1';
+          subHeading.style.transform = 'translateY(0)';
+          description.style.opacity = '1';
+          description.style.transform = 'translateY(0)';
+        }, 500);
+      }
+    };
+
+    el.textContent = "";
+    requestAnimationFrame(scramble);
+
+    // Dropdown Animation for navigation links
+    window.onload = () => {
+      const navLinks = document.querySelectorAll('nav a');
+      navLinks.forEach((link, index) => {
+        setTimeout(() => {
+          link.classList.add('visible');
+        }, index * 200);
+      });
+
+      const hero = document.querySelector('.hero');
+      hero.classList.add('visible');
+    };
+
+    // Redirect to About page when 'About' is clicked
+    const aboutBtn = document.getElementById('aboutBtn');
+    aboutBtn.addEventListener("click", function (e) {
+      e.preventDefault(); // Stop default # behavior
+      window.location.href = "about.html"; // Redirect to About page
+    });
+  </script>
+
+</body>
+</html>
